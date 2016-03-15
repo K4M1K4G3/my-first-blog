@@ -1,8 +1,17 @@
 <html>
 	<head>
-		<title>Hi there</title>
+		<title>M. Guimaraes</title>
 	</head>
-	<h1>Estamos trabalhando</h1>
-	<h6> Time to work more</h6>
-	<strong>Se for pra desistir desista de ser fraco!<strong>
+	<body>
+		<h1>Ainda não está pronto</h1>
+		<br>
+		{% for post in posts %}
+				<div>
+					<p>published: {{post.published_date}}</p>
+					<h3>{{post.title}}</h3>
+					<i>{{post.text | linebreaks}}</i>
+				</div>
+			{% endfor %}		
+		</div>
+	</body>
 </html>
