@@ -4,9 +4,9 @@ from .models import Post # adicionado 14/03/2016
 from .forms import PostForm
 from django.shortcuts import get_object_or_404
 from django.shortcuts import redirect
-
+# No .order_by('-published_date') se tirar o sinal negativo de 'published_date' vai ordenar do mais antigo primeiro para o post mais recente.
 def post_list(request):
-	posts = Post.objects.filter(published_date__lte=timezone.now()).order_by('published_date')
+	posts = Post.objects.filter(published_date__lte=timezone.now()).order_by('-published_date')
 	return render(request,'blog/post_list.html',{'posts':posts})
 
 def post_detail(request,pk):
@@ -36,6 +36,6 @@ def post_edit(request,pk):
 			post.published_date=timezone.now()
 			post.save()
 			return redirect('blog.views.post_detail',pk=post.pk)
-		else:
-			form=PostForm(instance=post)
-		return render(request,'blog/post_edit.html',{'form':form})
+	else:
+		form=PostForm(instance=post)
+	return render(request,'blog/post_edit.html',{'form':form})
